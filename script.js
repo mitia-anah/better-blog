@@ -1,5 +1,5 @@
 
-// grab the elements we need
+// grab the all elements that we need 
 const myPost = document.querySelector('#post-list');
 const postTitle = document.querySelector('#postTitle');
 const postContent = document.querySelector('textarea');
@@ -14,7 +14,7 @@ const newForm = document.querySelector('#form-card');
  submitBtn.addEventListener('click', ($event) => {
     $event.preventDefault();
 
-    //creat html 
+// here we creat the html 
     const myHTMLPost = `
     <div class="card">
         <img class="card-img-top"
@@ -40,23 +40,15 @@ const newForm = document.querySelector('#form-card');
  console.log(myPost);
 
 
-const buttonHideForm = document.getElementById('show-form');
-
-buttonHideForm.addEventListener('click', ($event) => {
-  if ($event.target.value ===  ".hidden") {
-    buttonHideForm.setAttribute('show-form', 'Add a post');
-  } else {
-      return buttonHideForm;
-  }
-});
-
-// To hide the form, you can hide the element with the id _#form-card_.
+// To hide the form
 const hiddenForm = document.getElementById('show-form');
 
 hiddenForm.addEventListener('click', ($event) => {
     newForm.style.display = "none";
 });
 
+
+//  invalid message when the user enter words less than 20
 const errorMessage = document.querySelector('#error-message');
 
 postContent.addEventListener('input', ($event) => {
