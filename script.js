@@ -1,40 +1,46 @@
-console.log('it works');
 
-const div = document.getElementById('post-list');
-const header = document.querySelector('#postTitle');
-const paragraph = document.querySelector('.form-control');
-const image = document.querySelector('img');
+// grab the elements we need
+const myPost = document.querySelector('#post-list');
+const postTitle = document.querySelector('#postTitle');
+const postContent = document.querySelector('textarea');
+postContent.classList.add("post-content");
+const deleteBtn = document.querySelector('btn', 'btn-sm', 'btn-light', 'btn-delete');
 const date = document.querySelector('.card-footer', 'text-muted');
-const button = document.querySelector('btn', 'btn-primary');
+const newPostForm = document.querySelector('form');
+const submitBtn = document.querySelector('.btn-primary');
+const newForm = document.querySelector('#form-card');
 
+// add the event listener on the submit, click
+ submitBtn.addEventListener('click', ($event) => {
+    $event.preventDefault();
 
-const divCard= document.createElement('div');
-const newImage = document.createElement('img');
-const divCardBody = document.createElement('div');
-const newHeader = document.createElement('h5');
-const newParagraph = document.createElement('p');
-const newDate = document.createElement('div');
-const newButton = document.createElement('button');
+    //creat html 
+    const myHTMLPost = `
+    <div class="card">
+        <img class="card-img-top"
+        src="https://picsum.photos/500/200"
+        alt="Card image cap"/>
 
+        <div class="card-body">
+            <h5 class="card-title">${postTitle.value}</h5>
 
-// add class to each element to its parent
+            <p class="card-text">${postContent.value}</p>
 
-divCard.classList.add('card');
-divCardBody.classList.add('card-body');
-newHeader.classList.add('card-title');
-newParagraph.classList.add('card-text');
+            <button class="btn btn-sm btn-light btn-delete">Delete entry</button>
 
-// join everything to the DOM
+            <div class="card-footer text-muted ">10/07/20202</div>
+        </div>
+    </div>
+    `;
 
-divCardBody.appendChild(newHeader);
-divCardBody.appendChild(newParagraph);
-divCard.appendChild(divCardBody);
+    myPost.innerHTML += myHTMLPost;
 
-div.appendChild(divCard);
-console.log(div);
+    newPostForm.reset();
+});
+ console.log(myPost);
+
 
 const buttonHideForm = document.getElementById('show-form');
-const hiddenForm = document.getElementById('form-card');
 
 buttonHideForm.addEventListener('click', ($event) => {
   if ($event.target.value ===  ".hidden") {
@@ -44,18 +50,19 @@ buttonHideForm.addEventListener('click', ($event) => {
   }
 });
 
+// To hide the form, you can hide the element with the id _#form-card_.
+const hiddenForm = document.getElementById('show-form');
+
 hiddenForm.addEventListener('click', ($event) => {
-    hidden
-  });
+    newForm.style.display = "none";
+});
 
+const errorMessage = document.querySelector('#error-message');
 
-
-// const button = document.querySelector('btn', 'btn-sm btn-light', 'btn-delete');
-
-// button.addEventListener('click', ($event) => {
-// $event.preventDefault();
-// newHeader.textContent = `${header.value}`;
-// newParagraph.textContent = `${paragraph.value}`;
-// div.appendChild(divCard);
-// });
-
+postContent.addEventListener('input', ($event) => {
+  if ($event.target.value.length < 20) {
+      errorMessage.style.display = 'block';
+  } else {
+      errorMessage.style.display = 'none';
+  }
+});
